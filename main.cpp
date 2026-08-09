@@ -53,6 +53,12 @@ int main() {
             
             player.Draw();
             ai.Draw(); 
+            if (CheckCollisionCircleRec(Vector2{ball.x, ball.y}, ball.radius, Rectangle{ai.x, ai.y, (float)ai.width, (float)ai.height})) {
+                ball.speed_x *= -1;
+            }
+            if (CheckCollisionCircleRec(Vector2{ball.x, ball.y}, ball.radius, Rectangle{player.x, player.y, (float)player.width, (float)player.height})) {
+                ball.speed_x *= -1;
+            }
             
             DrawLine(SCREEN_WIDTH / 2, 0, SCREEN_WIDTH / 2, SCREEN_HEIGHT, GRAY);
         EndDrawing();
