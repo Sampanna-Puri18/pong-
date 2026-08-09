@@ -1,37 +1,7 @@
-#include <iostream>
+#include "Ball.h"
+#include "PlayerPaddle.h"
+#include "AIPaddle.h"
 #include <raylib.h>
-
-using namespace std;
-
-class Ball {
-public:
-    float x, y;
-    int speed_x, speed_y;
-    int radius;
-};
-
-class PlayerPaddle {
-public:
-    float x, y;
-    int speed;
-    int width, height;
-
-    void Draw() {
-        DrawRectangle(x, y, width, height, RED);
-    }
-};
-
-class AIPaddle {
-public:
-    float x, y;
-    int speed;
-    int width, height;
-
-    
-    void Draw() {
-        DrawRectangle(x, y, width, height, BLUE);
-    }
-};
 
 int main() {
     const int SCREEN_WIDTH = 800;
