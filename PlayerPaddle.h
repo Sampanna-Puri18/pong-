@@ -9,4 +9,5 @@ public:
     int height;
 
     void Draw();
+    void Update();
 };

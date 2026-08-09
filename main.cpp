@@ -47,6 +47,7 @@ int main() {
         }
 
         BeginDrawing();
+        player.Update();
             ClearBackground(BLACK);
             DrawCircle(ball.x, ball.y, ball.radius, WHITE);
             
