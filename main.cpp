@@ -3,41 +3,90 @@
 
 using namespace std;
 
-int main () {
+class Ball {
+public:
+    float x, y;
+    int speed_x, speed_y;
+    int radius;
+};
 
+class PlayerPaddle {
+public:
+    float x, y;
+    int speed;
+    int width, height;
+
+    void Draw() {
+        DrawRectangle(x, y, width, height, RED);
+    }
+};
+
+class AIPaddle {
+public:
+    float x, y;
+    int speed;
+    int width, height;
+
+    
+    void Draw() {
+        DrawRectangle(x, y, width, height, BLUE);
+    }
+};
+
+int main() {
     const int SCREEN_WIDTH = 800;
     const int SCREEN_HEIGHT = 600;
-    int ball_x = 100;
-    int ball_y = 100;
-    int ball_speed_x = 5;
-    int ball_speed_y = 5;
-    int ball_radius = 15;
 
-    cout << "Hello World" << endl;
+    
+    Ball ball;
+    ball.x = 100;
+    ball.y = 100;
+    ball.speed_x = 5;
+    ball.speed_y = 5;
+    ball.radius = 15;
 
-    InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "My first RAYLIB program!");
+    
+    PlayerPaddle player;
+    player.width = 20;
+    player.height = 80;
+    player.x = 10;
+    player.y = SCREEN_HEIGHT / 2 - player.height / 2;
+    player.speed = 6;
+
+    
+    AIPaddle ai;
+    ai.width = 20;
+    ai.height = 80;
+    ai.x = SCREEN_WIDTH - ai.width - 10; 
+    ai.y = SCREEN_HEIGHT / 2 - ai.height / 2; 
+    ai.speed = 6;
+
+    InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Pong+");
     SetTargetFPS(60);
 
-    while (WindowShouldClose() == false){
-   
-        ball_x += ball_speed_x;
-        ball_y += ball_speed_y;
+    while (WindowShouldClose() == false) {
+        ball.x += ball.speed_x;
+        ball.y += ball.speed_y;
 
-        if(ball_x + ball_radius >= SCREEN_WIDTH || ball_x - ball_radius <= 0)
-        {
-            ball_speed_x *= -1;
+        if (ball.x + ball.radius >= SCREEN_WIDTH || ball.x - ball.radius <= 0) {
+            ball.speed_x *= -1;
         }
 
-        if(ball_y + ball_radius >= SCREEN_HEIGHT || ball_y - ball_radius <= 0)
-        {
-            ball_speed_y *= -1;
+        if (ball.y + ball.radius >= SCREEN_HEIGHT || ball.y - ball.radius <= 0) {
+            ball.speed_y *= -1;
         }
-        
+
         BeginDrawing();
             ClearBackground(BLACK);
-            DrawCircle(ball_x,ball_y,ball_radius, WHITE);
+            DrawCircle(ball.x, ball.y, ball.radius, WHITE);
+            
+            player.Draw();
+            ai.Draw(); 
+            
+            DrawLine(SCREEN_WIDTH / 2, 0, SCREEN_WIDTH / 2, SCREEN_HEIGHT, GRAY);
         EndDrawing();
     }
 
     CloseWindow();
+    return 0;
 }
